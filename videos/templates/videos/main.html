@@ -2,17 +2,26 @@
 
 {% block content %}
 
-    {% if object_list %}
 
-        {% for object in object_list %}
-            <div class="video_box">
-                <img src="{{ object.preview_pic.url }}"  width="200px" height="200px" alt="">
-                <p><a href="{% url 'profiles:detail' object.owner.pk %}">{{ object.owner }}</a></p>
-                <p>Опубликовано {{ object.date_uploaded }}</p>
-            </div>
-        {% endfor %}
+    <div class="container">
+        <div class="row">
+            {% if object_list %}
 
-    {% else %}
-        <h1>Видео пока нет</h1>
-    {% endif %}
+                {% for object in object_list %}
+                    <div class="video_box col-3">
+                        <a href="{% url 'videos:watch' object.pk %}"><img src="{{ object.preview_pic.url }}"  width="200px" height="200px" alt=""></a>
+                        <p><a href="{% url 'profiles:detail' object.owner.pk %}">{{ object.owner }}</a></p>
+                        <p>Опубликовано {{ object.date_uploaded }}</p>
+                    </div>
+                {% endfor %}
+
+            {% else %}
+
+                <h1>Видео пока нет</h1>
+
+            {% endif %}
+        </div>
+    </div>
+
+
 {% endblock %}
